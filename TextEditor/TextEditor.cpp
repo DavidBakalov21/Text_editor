@@ -68,15 +68,52 @@ int main()
 
         case '3':
 
-         
+            printf("Save to file\n");
+            FILE* file;
+            file = fopen("myFile.txt", "w");
+            if (file != NULL)
+            {
+                for (int i = 0; i < r; i++) {
+                    if (text[i][0] != '\0') {
+
+                        fputs(text[i], file);
+                    }
+                }
+                fclose(file);
+            }
+            else {
+                printf("Null\n");
+            }
             break;
 
         case '4':
-           
+            printf("load from file\n");
+            FILE* fileLoad;
+            char mystring[900];
+            file = fopen("myFile.txt", "r");
+            if (file == NULL)
+            {
+                printf("Error opening file");
+            }
+            else
+            {
+                while (fgets(mystring, 900, file) != NULL)
+                {
+                    printf("%s", mystring);
+                }
+                fclose(file);
+            }
+
 
             break;
         case '5':
-          
+            printf("print to console\n");
+            for (int i = 0; i < r; i++) {
+                if (text[i][0] != '\0') {
+                    printf("%d %s", i, text[i]);
+                }
+                
+            }
 
             break;
         case '6': {
