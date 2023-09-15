@@ -169,7 +169,45 @@ int main()
             break;
         }
         case '7': {
-            
+            int SearchRow = 0;
+            int SearchPlace = 0;
+            printf("search\n");
+            FILE* fileSearch;
+            char mystring[900];
+            char Searchstr[200];
+            fgets(Searchstr, sizeof(Searchstr), stdin);
+            size_t len = strlen(Searchstr);
+            if (len > 0 && Searchstr[len - 1] == '\n') {
+                Searchstr[len - 1] = '\0';
+            }
+            file = fopen("myFile.txt", "r");
+            if (file == NULL)
+            {
+                printf("Error opening file");
+            }
+            else
+            {
+                while (fgets(mystring, 900, file) != NULL)
+                {
+                    if (strstr(mystring, Searchstr)) {
+                        char copyText[900];
+                        strcpy(copyText, mystring);
+                        char* Firsttoken = strtok(copyText, " ");
+                        while (Firsttoken != NULL) {
+                            if (strcmp(Firsttoken, Searchstr) == 0)
+                            {
+                                printf("The coordinates: %d , %d\n", SearchRow, SearchPlace);
+                            }
+                            Firsttoken = strtok(NULL, " ");
+                            SearchPlace += 1;
+
+                        }
+                        SearchPlace = 0;
+                    }
+                    SearchRow += 1;
+                }
+                fclose(file);
+            }
 
             break;
         }
