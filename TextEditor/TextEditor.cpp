@@ -117,7 +117,55 @@ int main()
 
             break;
         case '6': {
-           
+            int row;
+            int Place;
+            char insert[500];
+
+
+            int BufferSize = 20;
+            char* BufferText = (char*)malloc(BufferSize * sizeof(char));
+
+
+
+            printf("Insert text by indexes\n");
+            scanf_s("%d", &row);
+            while ((getchar()) != '\n');
+            scanf_s("%d", &Place);
+            while ((getchar()) != '\n');
+            fgets(insert, sizeof(insert), stdin);
+            size_t len2 = strlen(insert);
+            if (len2 > 0 && insert[len2 - 1] == '\n') {
+                insert[len2 - 1] = '\0'; // replace newline with null terminator
+            }
+            while (strlen(text[row]) + strlen(insert) + 1 > c) {
+                c *= 2;  // double the row capacity
+                text[row] = (char*)realloc(text[row], c * sizeof(char));
+            }
+            while (BufferSize <= strlen(insert) + strlen(text[row]) + 1) {
+                BufferSize = BufferSize * 2;
+                BufferText = (char*)realloc(BufferText, BufferSize * sizeof(char));
+
+
+            }
+            int i = 0;
+            int j = 0;
+            for (i = 0, j = 0; i < strlen(text[row]); i++) {
+                if (i == Place) {
+                    strcpy(BufferText + j, insert);
+                    j += strlen(insert);
+                }
+                BufferText[j++] = text[row][i];
+            }
+
+            if (i == Place) {
+                strcpy(BufferText + j, insert);
+                j += strlen(insert);
+            }
+
+            BufferText[j] = '\0';
+
+            strcpy(text[row], BufferText);
+
             break;
         }
         case '7': {
