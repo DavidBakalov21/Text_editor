@@ -212,7 +212,9 @@ int main()
             break;
         }
         case '8':
-         
+            system("cls");
+            printf("clear\n");
+            printf("1-Append in the end, 2-Start new line, 3-Save to file, 4-load from file, 5-print to console, 6-Insert text by indexes, 7-search, 8-clear\n");
             break;
 
 
