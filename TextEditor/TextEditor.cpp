@@ -2,6 +2,12 @@
 #include <stdio.h>
 #include <string.h>
 
+void Clear() {
+    system("cls");
+    printf("clear\n");
+    printf("1-Append in the end, 2-Start new line, 3-Save to file, 4-load from file, 5-print to console, 6-Insert text by indexes, 7-search, 8-clear\n");
+}
+
 int main()
 {
     bool loop = true;
@@ -110,7 +116,7 @@ int main()
             printf("print to console\n");
             for (int i = 0; i < r; i++) {
                 if (text[i][0] != '\0') {
-                    printf("%d %s", i, text[i]);
+                    printf("%d %s\n", i, text[i]);
                 }
                 
             }
@@ -120,9 +126,9 @@ int main()
             int row;
             int Place;
             char insert[500];
+            int more;
 
-
-            int BufferSize = 20;
+            int BufferSize = 700;
             char* BufferText = (char*)malloc(BufferSize * sizeof(char));
 
 
@@ -147,25 +153,29 @@ int main()
 
 
             }
+            more =   Place+1- strlen(text[row]);
+            if (more<1)
+            {
+                more = 0;
+            }
+           
             int i = 0;
-            int j = 0;
-            for (i = 0, j = 0; i < strlen(text[row]); i++) {
+            int BP = 0;
+            for (i; i < strlen(text[row]); i++)
+            {
                 if (i == Place) {
-                    strcpy(BufferText + j, insert);
-                    j += strlen(insert);
+                    for (int j = 0; j <strlen(insert); j++)
+                    {
+                        BufferText[BP] = insert[j];
+                        BP++;
+                    }
+
                 }
-                BufferText[j++] = text[row][i];
+                BufferText[BP] = text[row][i];
+                BP++;
             }
-
-            if (i == Place) {
-                strcpy(BufferText + j, insert);
-                j += strlen(insert);
-            }
-
-            BufferText[j] = '\0';
-
+            BufferText[BP] = '\0';
             strcpy(text[row], BufferText);
-
             break;
         }
         case '7': {
@@ -212,9 +222,7 @@ int main()
             break;
         }
         case '8':
-            system("cls");
-            printf("clear\n");
-            printf("1-Append in the end, 2-Start new line, 3-Save to file, 4-load from file, 5-print to console, 6-Insert text by indexes, 7-search, 8-clear\n");
+            Clear();
             break;
 
 
